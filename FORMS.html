@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .container{
+            margin: auto;
+            padding: 20px;
+            border: 2px solid;
+            max-width: auto;
+            color: rgb(99, 242, 187);
+            background-color: rgb(50, 49, 49);
+        }
+        /* Add styles for the modal overlay */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+            display: none;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Style the modal content */
+        .modal-content {
+            background-color: white;
+            border: 1px solid black;
+            border-radius: 5px;
+            padding: 20px;
+        }
+        .modal-footer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .row{
+            padding: 20px 20px;
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1  style="text-align: center;">BASIC FORM</h1>
+        <form onsubmit="return showFullName()">
+            <div class="row">
+            <div class="form-group col-md-2">
+                <label for="fname">FIRST NAME:</label>
+                <input type="text" class="form-control" id="fname" name="fname">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="lname">LAST NAME:</label>
+                <input type="text" class="form-control" id="lname" name="lname">
+            </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <!-- Add a modal overlay -->
+        <div class="modal-overlay" id="modalOverlay"></div>
+        <div class="modal" id="myModal">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">USER NAME</h4>
+                        <button type="button" class="close" data-dismiss="modal" onclick="closeModal()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p id="modal-body-text">Modal body..</p>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- Center-align the close button in the modal footer -->
+                        <button type="button" class="btn btn-success" onclick="closeModal()">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript and Bootstrap scripts -->
+    <script>
+        function showFullName() {
+            var firstName = document.getElementById("fname").value;
+            var lastName = document.getElementById("lname").value;
+            var fullName = firstName + " " + lastName;
+            document.getElementById("modal-body-text").textContent = "FULL NAME: " + fullName;
+
+            // Show the modal and overlay
+            document.getElementById("myModal").style.display = "block";
+            document.getElementById("modalOverlay").style.display = "block";
+
+            return false;
+        }
+
+        function closeModal() {
+            document.getElementById("myModal").style.display = "none";
+            document.getElementById("modalOverlay").style.display = "none";
+            document.getElementById("fname").value = "";
+            document.getElementById("lname").value = "";
+        }
+
+        window.onclick = function (event) {
+            var modal = document.getElementById("myModal");
+            if (event.target == modal) {
+                closeModal();
+            }
+        };
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
